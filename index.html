@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+</script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My First Website</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>Anna Steinhart hat einen kleinen Lümmel</h1>
+ <p>Ich habe ihn mit eigenen Augen gesehen</p>
+<br>
+<button onclick="showQuote()">Click für ein Stückchen Anna</button>
+<div id="quoteDisplay"></div>
+
+<div id="newText"></div>
+
+<script>
+
+  // --- The Master List of Everything ---
+    const allItems = [
+
+{ type: "quote", text: "Lieber zwei Damen im Arm, als zwei Arme im Darm" },
+{ type: "quote", text: "Lieber ne Schwanzgierige statt ne ganz Schwierige" },
+{ type: "quote", text: "Die Spermaschleuder" },
+{ type: "quote", text: "Ich geh' mal Klitarre spielen"},
+{ type: "quote", text: "Lieber weinend in den Schlaf masturbieren, als schlafend in den Wein" },
+{ type: "quote", text: "Lieber im Stuhl einschlafen als im Schlaf einstuhlen" },
+{ type: "quote", text: "Lieber Schwänze Schulen als Schule Schwänzen" },
+{ type: "quote", text: "ICH KANN DAS ALLES NICHT MEHR" },
+{ type: "quote", text: "Ich bin ja nicht rassistisch, aber... \n-Anna Steinhart" },
+{ type: "quote", text: "Lieber zwei Damen im Arm, als zwei Arme im Darm" },
+ { type: "photo", src: "Anna.jpg", alt: "Anna" } // ← The photo
+
+           
+
+     ];
+
+    // --- This is the "pool" of items we haven't shown yet ---
+    let availableItems = [];
+
+    // --- Helper function to shuffle an array (Fisher-Yates shuffle) ---
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];  // Swap elements
+        }
+        return array;
+    }
+
+    // --- Refill and shuffle the pool ---
+    function refillPool() {
+        // Create a fresh copy of all items and shuffle them
+        availableItems = shuffleArray([...allItems]);
+    }
+
+    // --- The Main Function Called by the Button ---
+    function showQuote() {
+        // Step 1: If the pool is empty, refill it
+        if (availableItems.length === 0) {
+            refillPool();
+        }
+
+        // Step 2: Take the LAST item from the pool
+        const selectedItem = availableItems.pop();
+
+        // Step 3: Display it
+        if (selectedItem.type === "quote") {
+            const lines = selectedItem.text.split("\n");
+
+            // First line goes in quotes
+            const quotedLine = `"${lines[0]}"`;
+
+            // Remaining lines (if any) go outside quotes
+            const restLines = lines.slice(1).join("<br>");
+
+            // Combine them
+            let displayText = `<br>${quotedLine}`;
+            if (restLines) {
+                displayText += `<br>${restLines}`;
+            }
+
+            document.getElementById("quoteDisplay").innerHTML = displayText;
+        } else {
+            // It's a photo!
+            document.getElementById("quoteDisplay").innerHTML = `<br><img src="${selectedItem.src}" alt="${selectedItem.alt}" width="300">`;
+        }
+    }
+
+  
+</script>
+
+
+</body>
+</html>
+

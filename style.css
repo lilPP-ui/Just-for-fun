@@ -1,0 +1,30 @@
+body {
+    background-color: black;      /* Makes the background black */
+    color: white;                 /* Makes the text white */
+    display: flex;                /* Enables flexbox for centering */
+flex-direction: column;
+    justify-content: center;      /* Centers horizontally */
+    align-items: center;          /* Centers vertically */
+    height: 100vh;                /* Makes the body fill the whole screen height */
+    margin: 0;                    /* Removes default page margins */
+    font-family: Arial, sans-serif; /* Optional: a clean font */
+}
+
+
+h1 {
+    margin-bottom: 5px;   /* Reduces space below the heading */
+}
+
+p {
+    margin-top: 0;        /* Removes space above the paragraph */
+}
+
+
+.small-text {
+font-size: 12px;
+}
+
+#newText {
+font-size: 14px;
+text-align: center;
+}
